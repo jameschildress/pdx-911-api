@@ -1,7 +1,8 @@
 helpers do
 
 
-
+    
+    # Return an array of the results of a parameterized SQL query.
     def query sql, *params
       db = PG::Connection.open(settings.database_connection)
       result = db.exec_params(sql, params)
@@ -11,12 +12,11 @@ helpers do
     
     
     
-    def jsonp_response content, callback
-      [
-        200,
-        { "Content-Type" => "application/json" },
-        ["#{callback}(#{content.to_json})"]
-      ]
+    # Return a valid Rack response object for a JSON or JSONP request.
+    def jsonp_response content
+      json = content.to_json
+      json = params[:callback] ? "#{params[:callback]}(#{json})" : json
+      [200, { "Content-Type" => "application/json" }, [json]]
     end
     
     
