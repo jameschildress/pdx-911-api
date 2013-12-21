@@ -34,47 +34,21 @@ end
 # Params
 # - callback : the name of the JSONP callback function
 # - offset   : the number of results by which the query is offset
+# - agency   : the ID of the agency by which dispatches are filtered
+# - category : the ID of the category by which dispatches are filtered
+# - date     : TODO
 get '/dispatches' do
+  
+  where = [];
+  where << "agency_id = #{params[:agency].to_i}" if params[:agency]
+  where << "category_id = #{params[:category].to_i}" if params[:category]
+  where = where.join " AND "
+  where = "WHERE " + where unless where.empty?
+  
   jsonp_response query(
-    'SELECT * FROM dispatches LIMIT $1 OFFSET $2',
+    "SELECT * FROM dispatches #{where} ORDER BY date DESC LIMIT $1 OFFSET $2",
     settings.max_results, 
     params[:offset].to_i
-  )
-end
-
-
-
-# Return a list of dispatches for a given agency.
-# Results are limited by the 'max_results' setting.
-# 
-# Params
-# - callback  : the name of the JSONP callback function
-# - offset    : the number of results by which the query is offset
-# - agency_id : the ID of the agency by which dispatches are filtered
-get '/dispatches/agency/:agency_id' do
-  jsonp_response query(
-    'SELECT * FROM dispatches WHERE agency_id = $3 LIMIT $1 OFFSET $2',
-    settings.max_results,
-    params[:offset].to_i,
-    params[:agency_id].to_i
-  )
-end
-
-
-
-# Return a list of dispatches for a given category.
-# Results are limited by the 'max_results' setting.
-# 
-# Params
-# - callback    : the name of the JSONP callback function
-# - offset      : the number of results by which the query is offset
-# - category_id : the ID of the category by which dispatches are filtered
-get '/dispatches/category/:category_id' do
-  jsonp_response query(
-    'SELECT * FROM dispatches WHERE category_id = $3 LIMIT $1 OFFSET $2',
-    settings.max_results,
-    params[:offset].to_i,
-    params[:category_id].to_i
   )
 end
 
