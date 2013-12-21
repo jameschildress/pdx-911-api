@@ -77,3 +77,10 @@ get '/dispatches/category/:category_id' do
     params[:category_id].to_i
   )
 end
+
+
+
+# Catchall route returns 404 status.
+get "/*" do
+  404
+end
