@@ -23,11 +23,23 @@
       }
       
       #pdx911-header {
-        background: #def;
+        background: #333;
+        color: #fff;
+      }
+      
+      #pdx911-header a {
+        color: #eee;
+        text-decoration: none;
+        border-bottom: 1px dashed #fff;
+      }
+      
+      #pdx911-header a:hover {
+        color: #aef;
       }
 
       #pdx911-jsonp {
         background: #eee;
+        color: #555;
       }
       
       h1 {
@@ -48,6 +60,12 @@
         line-height: 1.5;
       }
       
+      code {
+        color: #a40;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+      }
+      
       dl {
         margin-left: 20px;
         display: table;
@@ -57,12 +75,24 @@
         display: table-row;
       }
       
+      dl div dd, dl div dt {
+        border-top: 1px solid #ccc;
+        padding: 2px 20px 2px 0;
+      }
+
+      dl div:first-child dd, dl div:first-child dt {
+        border-top: none;
+      }
+      
       dd {
         display: table-cell;
       }
       
       dt {
         display: table-cell;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        color: #a40;
       }
 
     </style>
@@ -83,7 +113,9 @@
     <section id="pdx911-jsonp">
       <h2>JSON or JSONP</h1>
       <p>
-        Data is returned as a JSON array by default. To receive JSONP, add the
+        Data is returned as a JSON array by default.
+        <br/>
+        To receive JSONP, add the
         <code>callback=[name]</code> parameter to any request, where
         <code>[name]</code> is the name of the function with which the JSON will be padded.
       </p>
