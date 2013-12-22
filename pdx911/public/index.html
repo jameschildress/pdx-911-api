@@ -3,10 +3,140 @@
 
   <head>
     <title>PDX 911 Dispatches API</title>
+    <style>
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body, html {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        padding: 0;
+        margin: 0;
+      }
+
+      section {
+        padding: 15px 20px;
+        border-bottom: 1px solid #aaa;
+      }
+      
+      #pdx911-header {
+        background: #def;
+      }
+
+      #pdx911-jsonp {
+        background: #eee;
+      }
+      
+      h1 {
+        margin-bottom: 5px;
+        font-weight: 300;
+        font-size: 48px;
+      }
+
+      h2 {
+        margin-bottom: 5px;
+      }
+      
+      h3 {
+        margin: 10px 0 5px 20px ;
+      }
+      
+      p, dd, dt {
+        line-height: 1.5;
+      }
+      
+      dl {
+        margin-left: 20px;
+        display: table;
+      }
+      
+      dl div {
+        display: table-row;
+      }
+      
+      dd {
+        display: table-cell;
+      }
+      
+      dt {
+        display: table-cell;
+      }
+
+    </style>
   </head>
   
+  
+  
+  
   <body>
-    <h1>PDX 911 Dispatches API</h1>
+
+    <section id="pdx911-header">
+      <h1>PDX 911 Dispatches API</h1>
+      <p>Gorge yourself with data scraped from
+        <a href="http://www.civicapps.org/datasets/911-dispatch-incidents-georss">Portland's 911 RSS feed</a>.
+      </p>
+    </section>
+    
+    <section id="pdx911-jsonp">
+      <h2>JSON or JSONP</h1>
+      <p>
+        Data is returned as a JSON array by default. To receive JSONP, add the
+        <code>callback=[name]</code> parameter to any request, where
+        <code>[name]</code> is the name of the function with which the JSON will be padded.
+      </p>
+    </section>
+    
+    <section class="pdx911-route">
+      <h2>GET <code>/agencies</code></h2>
+      <p>Returns an array of every agency to which a dispatch may be assigned.</p>
+      <h3>Attributes</h3>
+      <dl>
+        <div> <dt>name</dt> <dd>The name of the agency.</dd>       </div>
+        <div> <dt>id</dt>   <dd>The unique ID of this agency.</dd> </div>
+      </dl>
+    </section>
+    
+    <section class="pdx911-route">
+      <h2>GET <code>/categories</code></h2>
+      <p>Returns an array of every category of dispatch.</p>
+      <h3>Attributes</h3>
+      <dl>
+        <div> <dt>name</dt> <dd>The name of this category.</dd>      </div>
+        <div> <dt>id</dt>   <dd>The unique ID of this category.</dd> </div>
+      </dl>
+    </section>
+    
+    <section class="pdx911-route">
+      <h2>GET <code>/dispatches</code></h2>
+      <p>
+        Returns an array of dispatches, beginning with the most recent dispatch.
+        <br/>
+        A maximum of 100 dispatches is returned.
+      </p>
+      <h3>Parameters</h3>
+      <dl>
+        <div>
+          <dt>offset</dt>
+          <dd>
+            The number of dispatches by which the results should be offset.
+            <br/>
+            For example, if your query exceeds the 100-dispatch limit,
+            <code>offset=100</code> would return the second 'page' of results.
+          </dd>
+        </div>
+        <div> <dt>category</dt> <dd>Only dispatches belonging to the category with this ID will be returned.</dd> </div>
+        <div> <dt>agency</dt>   <dd>Only dispatches belonging to the agency with this ID will be returned.</dd>   </div>
+        <div> <dt>before</dt>
+        <div> <dt>after</dt>
+      </dl>
+      <h3>Attributes</h3>
+      <dl>
+      </dl>
+    </section>
+    
   </body>
   
 </html>
