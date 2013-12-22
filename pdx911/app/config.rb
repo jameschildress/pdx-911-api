@@ -29,6 +29,8 @@ end
 
 configure do
   
+  set :protection, except: :json_csrf  # Prevent 403 on AJAX requests
+  
   set :feed_uri, URI.parse('http://www.portlandonline.com/scripts/911incidents.cfm')
   
 end
