@@ -3,8 +3,8 @@ configure :production, :development do
   set :database_connection, {
     host:     'localhost',
     dbname:   ENV['PDX911_DATABASE_NAME'],
-    user:     ENV['PDX911_DATABASE_USER'],
-    password: ENV['PDX911_DATABASE_PASSWORD']
+    user:     ENV['PDX911_READONLY_DATABASE_USER'],
+    password: ENV['PDX911_READONLY_DATABASE_PASSWORD']
   }
 
   set :max_results, 100
