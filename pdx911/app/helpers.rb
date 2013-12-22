@@ -14,9 +14,9 @@ helpers do
     
     # Return a valid Rack response object for a JSON or JSONP request.
     def jsonp_response content
+      content_type :json
       json = content.to_json
-      json = params[:callback] ? "#{params[:callback]}(#{json})" : json
-      [200, { "Content-Type" => "application/json" }, [json]]
+      params[:callback] ? "#{params[:callback]}(#{json})" : json
     end
     
     
