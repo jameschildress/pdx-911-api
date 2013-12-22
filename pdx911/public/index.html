@@ -22,18 +22,18 @@
         border-bottom: 1px solid #aaa;
       }
       
-      #pdx911-header {
+      #pdx911-header, #pdx911-footer {
         background: #333;
         color: #fff;
       }
       
-      #pdx911-header a {
+      #pdx911-header a, #pdx911-footer a {
         color: #eee;
         text-decoration: none;
         border-bottom: 1px dashed #fff;
       }
       
-      #pdx911-header a:hover {
+      #pdx911-header a:hover, #pdx911-footer a:hover {
         color: #aef;
       }
 
@@ -126,8 +126,8 @@
       <p>Returns an array of every agency to which a dispatch may be assigned.</p>
       <h3>Attributes</h3>
       <dl>
-        <div> <dt>name</dt> <dd>The name of the agency.</dd>       </div>
-        <div> <dt>id</dt>   <dd>The unique ID of this agency.</dd> </div>
+        <div><dt>id</dt>   <dd>The unique ID of this agency.</dd></div>
+        <div><dt>name</dt> <dd>The name of the agency.</dd></div>
       </dl>
     </section>
     
@@ -136,15 +136,15 @@
       <p>Returns an array of every category of dispatch.</p>
       <h3>Attributes</h3>
       <dl>
-        <div> <dt>name</dt> <dd>The name of this category.</dd>      </div>
-        <div> <dt>id</dt>   <dd>The unique ID of this category.</dd> </div>
+        <div><dt>id</dt>   <dd>The unique ID of this category.</dd></div>
+        <div><dt>name</dt> <dd>The name of this category.</dd></div>
       </dl>
     </section>
     
     <section class="pdx911-route">
       <h2>GET <code>/dispatches</code></h2>
       <p>
-        Returns an array of dispatches, beginning with the most recent dispatch.
+        Returns an array of dispatches, sorted by date, beginning with the most recent dispatch.
         <br/>
         A maximum of 100 dispatches is returned.
       </p>
@@ -159,14 +159,28 @@
             <code>offset=100</code> would return the second 'page' of results.
           </dd>
         </div>
-        <div> <dt>category</dt> <dd>Only dispatches belonging to the category with this ID will be returned.</dd> </div>
-        <div> <dt>agency</dt>   <dd>Only dispatches belonging to the agency with this ID will be returned.</dd>   </div>
-        <div> <dt>before</dt>
-        <div> <dt>after</dt>
+        <div><dt>category</dt> <dd>Only dispatches belonging to the category with this ID will be returned.</dd></div>
+        <div><dt>agency</dt>   <dd>Only dispatches belonging to the agency with this ID will be returned.</dd></div>
+        <div><dt>before</dt>   <dd>Only dispatches before this date (in seconds since the Unix epoch) will be returned.</dd></div>
+        <div><dt>after</dt>    <dd>Only dispatches on or after this date (in seconds since the Unix epoch) will be returned.</dd></div>
       </dl>
       <h3>Attributes</h3>
       <dl>
+        <div><dt>id</dt>          <dd>The unique ID of this dispatch.</dd></div>
+        <div><dt>category_id</dt> <dd>The ID of the category to which this dispatch belongs.</dd></div>
+        <div><dt>agency_id</dt>   <dd>The ID of the agency assigned to this dispatch.</dd></div>
+        <div><dt>uid</dt>         <dd>A unique identified assigned to this dispatch.</dd></div>
+        <div><dt>date</dt>        <dd>The date and time on which this dispatch occurred.</dd></div>
+        <div><dt>location</dt>    <dd>The latitude and longitude at which this dispatch occurred.</dd></div>
+        <div><dt>address</dt>     <dd>A description of the approximate location at which this dispatch occurred.</dd></div>
       </dl>
+    </section>
+    
+    <section id="pdx911-footer">
+      <p>
+        API and feed-scraping by
+        <a href="https://github.com/jameschildress">James Childress</a>.
+      </p>
     </section>
     
   </body>
